@@ -42,7 +42,7 @@ class Preview(BaseParser):
     def get_links(self):
         try:
             html = self._get_page(PREVIEW_URL.format(HOST, self.__num_page))
-        
+
         except ValueError:
             self.__links = []
         else:
@@ -52,16 +52,15 @@ class Preview(BaseParser):
                 top_box.append(i)
             if top_box is not None:
                 for rubric in top_box:
-                    box2 = rubric.find_all("div", asttrs={"class": "news-entry"})
+                    box2 = rubric.find_all("div", attrs={"class": "news-entry"})
                     if box2 is not None:
                         for a in box2:
-                            link = a.find("a", attrs={"class": "entry__links"})
-                            print(link)
+                            link = a.find("a", attrs={"class": "entry__link"})
+                            # print(link)
                             print(link.get("href"), end="\n\n")
                             self.__links.append(link.get("href"))
             else:
                 self.__links = []                 
-
     
         
     def save_to_file(self, name):
