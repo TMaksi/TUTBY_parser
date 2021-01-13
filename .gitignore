@@ -142,3 +142,5 @@ news_data/
 .vscode/
 *.bin
 *.json
+!research.txt
+tmp_.*

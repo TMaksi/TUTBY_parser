@@ -57,21 +57,26 @@ class Preview(BaseParser):
                         for a in box2:
                             link = a.find("a", attrs={"class": "entry__links"})
                             print(link)
-                            print(link.get("href"), end = "\n\n") 
+                            print(link.get("href"), end="\n\n")
                             self.__links.append(link.get("href"))
             else:
                 self.__links = []                 
 
+    
+        
     def save_to_file(self, name):
         path = os.path.join(BASE_DIR, name + ".bin")
         pickle.dump(self.__links, open(path, "wb"))
 
     def save_to_json(self, name):
         path = os.path.join(BASE_DIR, name + ".json")
-        pickle.dump(self.__links, open(path, "w"))    
+        json.dump(self.__links, open(path, "w"))    
 
 if __name__ == "__main__":
     parser = Preview(page="03.10.2000")
     parser.get_links()
     parser.save_to_json("03.10.2000")
     parser.save_to_file("03.10.2000")
+
+    
+   
